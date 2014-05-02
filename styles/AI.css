@@ -1,0 +1,65 @@
+/* screen specific margin */
+#lookupGroup {
+  margin-bottom: 20px;
+}
+
+/* this makes anything have straight edges */
+.square {
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
+}
+
+/* this makes anything have rounded edges*/
+.round {
+  border-radius: clear;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.center {
+  float: none;
+  margin: 0 auto;
+}
+
+.colorMatch {
+  background-color: #3e3e40;
+}
+
+.chart {
+  border: 1px solid;
+  border-color: #E0E0E3;
+  padding: 0;
+  height: 300px;
+}
+
+.dashboard {
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+.no-border {
+  border: none;
+}
+
+/* This keep the scroll bar for tables on all layouts */
+.table-responsive {
+  overflow-x: auto;
+  background-color: #002A3A;
+  color: #E0E0E3;
+}
+
+/* This keeps the table from having a margin on the bottom for all layout sizes (this overrides bootstrap) */
+.dataTable {
+  margin-bottom: 0px;
+}
+
+/* setting the color for buttons */
+.btn {
+  background-color: #90EE7E;
+}
+
+.marginBottom {
+    margin-bottom: 20px;
+}
