@@ -1,5 +1,5 @@
 //google.load("visualization", "1", {packages:["corechart"]});
-
+var debitCredit;
 $(document).ready(function() {
 
 Highcharts.theme = {
@@ -268,7 +268,7 @@ $('#deficit').highcharts({
 		]
 	}]
 });
-
+//debit credit interest 
 $('#debitCredit').highcharts({
 	colors: ['#FBB369', '#7798BF'],
 	chart: {
@@ -279,6 +279,7 @@ $('#debitCredit').highcharts({
 	},
 	xAxis: {
 		categories: ['Credit Interest', 'Margin']
+                //categories: []
 	},
 	yAxis: {
 		title: {
@@ -298,7 +299,8 @@ $('#debitCredit').highcharts({
 	},
 	series: [{
 		name: 'Amount',
-		data: [-2100000000.25, 2400000000.35]
+		//data: [-2100000000.25, 2400000000.35]
+                data: [0,0]
 	}]
 });
 
@@ -467,26 +469,26 @@ $('#acats-reps').highcharts({
 });
 
 //This is going to be a bunch of faking incoming data !!!!HORRIBLE names (dCC)!!!!
-var deficitChart = $('#deficit').highcharts(), dCx = $('#deficit').highcharts().series[0].data[1].x;
+//var deficitChart = $('#deficit').highcharts(), dCx = $('#deficit').highcharts().series[0].data[1].x;
 
-var marginCallChart = $('#marginCall').highcharts(), mCCx = $('#marginCall').highcharts().series[0].data[4].x;
+//var marginCallChart = $('#marginCall').highcharts(), mCCx = $('#marginCall').highcharts().series[0].data[4].x;
 
-var debitCreditChart = $('#debitCredit').highcharts(), dCC = $('#debitCredit').highcharts().series[0].data[1].y;
-var debitCreditChart2 = $('#debitCredit').highcharts(), dCC2 = $('#debitCredit').highcharts().series[0].data[0].y;
+//var debitCreditChart = $('#debitCredit').highcharts(), dCC = $('#debitCredit').highcharts().series[0].data[1].y;
+//var debitCreditChart2 = $('#debitCredit').highcharts(), dCC2 = $('#debitCredit').highcharts().series[0].data[0].y;
 
-window.setInterval(function() {
-	marginCallChart.series[0].data[4].update(mCCx += 1000000)
-}, 1000);
+//window.setInterval(function() {
+//	marginCallChart.series[0].data[4].update(mCCx += 1000000)
+//}, 1000);
 
 // window.setInterval(function() {
 // 	deficitChart.series[0].data[1].update(dCx = (20 + Math.floor(Math.random() * 5000)))
 // }, 10000);
-
+/*
 window.setInterval(function() {
 	debitCreditChart.series[0].data[1].update(dCC += (10000000 + Math.floor(Math.random() * -20000000)))
 	debitCreditChart2.series[0].data[0].update(dCC2 += (200000000 + Math.floor(Math.random() * -400000000)))
 }, 5000);
-
+*/
 
 
 var storage = window.localStorage;
@@ -501,4 +503,27 @@ $("#button1").click(function save() {
 	alert(storage.text);
 });
 
+console.log("I made it here 99");
+setInterval(function() { getData(); }, 30000);
+
+function getData(){
+             console.log("retrieving data from server ");
+             var debitCreditChart3 = $('#debitCredit').highcharts();
+             var url = "http://localhost/risk/cssRiskDREST.svc/interestsummary";
+             var arr =[];
+             $.getJSON (url, function (interestData) {
+                                var data = interestData;
+                                for (var key in data) {
+                                     console.log(data[key].InterestAmount);
+                                     var amount = data[key].InterestAmount;
+                                     arr.push(amount); 
+                                 }  
+                                 // update the series data
+                 
+                 debitCreditChart3.series[0].setData(arr);
+                 
+                 
+             });
+         }
+         
 });
